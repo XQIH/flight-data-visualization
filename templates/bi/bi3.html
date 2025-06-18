@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bi_bi3/css/bi3.css' %}">
+    <title>数据可视化</title>
+</head>
+
+<body>
+    <div class="Container">
+        <!-- 头部 -->
+        <div class="HeaderTop">
+            <!-- 左侧选择区 -->
+            <div class="List">
+                <ul>
+                    <li><a href="{% url 'sysuser:index' %}" style="color: #ffffff; text-decoration: none;">首页</a></li>
+                    <li data-index="0" class="option active ">数据大屏</li>
+                    <li data-index="1" class="option">出发地目的地</li>
+{#                    <li data-index="2" class="option">出发地目的地</li>#}
+{#                    <li data-index="3" class="option">最后一个页面</li>#}
+                </ul>
+            </div>
+            <!--  -->
+            <h1>航班信息数据分析与可视化系统</h1>
+
+            <div class="admin">
+                <a href="/admin/" style="text-decoration: none;color: #dddddd">后台</a>
+            </div>
+        </div>
+        <!-- 展示区 -->
+        <div class="DisplayArea">
+       <!-- 一、 -->
+            <div class="Box Box_1">
+                <div class="LScreen_1">
+                   {{ bar_html1|safe }}
+                </div>
+                <div class="LScreen_2">
+                    {{ word_html2|safe }}
+                </div>
+                <div class="LScreen_3">
+                    <div class="LScreen_3_1" id="LScreen_3_1">{{ pie_html3|safe }}</div>
+                    <div class="LScreen_3_2" id="LScreen_3_2">{{ line_html4|safe }}</div>
+                </div>
+                <div class="LScreen_4">
+                    <div class="LScreen_4_1" id="LScreen_4_1">{{ line_html5|safe }}</div>
+                    <div class="LScreen_4_2" id="LScreen_4_2">{{ pie_html6|safe }}</div>
+                </div>
+            </div>
+   <!-- 二、 -->
+            <div class="Box Box_2" id="Box_2">
+                <!-- 主页面部分 -->
+                <div class="Main">
+                    <div class="Content Main_One">
+                        <h3></h3>
+                        <div class="Data" id="Data1">{{ pie_html7|safe }}</div>
+                    </div>
+                    <div class="Main_main" id="Data111">{{ map_html7|safe }}</div>
+                    <div class="Content Main_Two">
+                        <h3></h3>
+                        <div class="Data" id="Data2">{{ pie_html8|safe }}</div>
+                    </div>
+                    <div class="Content Main_three">
+                        <h3></h3>
+                        <div class="Data" id="Data3">{{ bar_html9|safe }}</div>
+                    </div>
+                    <div class="Content Main_four">
+                        <h3></h3>
+                        <div class="Data" id="Data4">{{ bar_html10|safe }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'bi_bi3/js/bi3_1.js' %}"></script>
+</body>
+
+</html>

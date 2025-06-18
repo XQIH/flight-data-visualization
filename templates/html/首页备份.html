@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>航班数据可视化系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00A3B5',
+                        secondary: '#4A90E2'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '2px',
+                        DEFAULT: '4px',
+                        'md': '8px',
+                        'lg': '12px',
+                        'xl': '16px',
+                        '2xl': '20px',
+                        '3xl': '24px',
+                        'full': '9999px',
+                        'button': '4px'
+                    }
+                }
+            }
+        }
+
+        function handleLinkClick(event, redirectTo) {
+            var sessionId = getSessionId();
+            if (!sessionId) {
+                // 阻止默认行为
+                event.preventDefault();
+                // 弹出提示
+                Swal.fire({
+                    title: '请先登录！',
+                    text: '点击确定去登录,点击其它地方取消！',
+                    icon: 'success',
+                    confirmButtonText: '确定'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        console.log(ROOTPATH);
+                        // 重定向到登录页面
+                        window.location.href = ROOTPATH + redirectTo;
+                        console.log('Session ID:', sessionId);
+                    }
+                });
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+        body {
+            min-height: 1024px;
+            background-color: #f5f5f5;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #fff;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .chart-container {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+
+</head>
+<body>
+<nav class="bg-primary px-6 py-4 flex items-center justify-between w-full">
+    <div class="mx-auto" style="width: 1440px;">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center">
+                <a href="#" class="text-white text-2xl font-['Pacifico']">logo</a>
+                <div class="ml-12 flex space-x-8">
+                    <a href="{% url 'sysuser:index' %}" class="nav-link text-white">首页</a>
+                    <a href="{% url 'sysuser:table' %}" class="nav-link text-white">航班信息数据</a>
+                    <a href="{% url 'visual:bi_3' %}" onclick="handleLinkClick(event, '/login')"
+                       class="nav-link text-white">数据大屏</a>
+                    <a href="admin/" target="_blank" class="nav-link text-white">后台</a>
+                </div>
+            </div>
+            <div class="flex items-center relative group">
+                {% if username %}
+                    <button class="flex items-center space-x-2 text-white !rounded-button px-4 py-2 hover:bg-white/10">
+                        <!-- 新增头像显示 -->
+                        {% if user.touxiang %}
+                            <img src="/media/{{ user.touxiang }}" 
+                                class="w-8 h-8 rounded-full object-cover border-2 border-white">
+                        {% else %}
+                            <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                                <i class="fas fa-user text-primary"></i>
+                            </div>
+                        {% endif %}
+                        <span>{{ username }}</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </button>
+                    <div class="absolute hidden group-hover:block right-0 top-full mt-2 bg-white rounded-lg shadow-lg py-2 w-48">
+                        <div class="px-4 py-2 border-b border-gray-100">
+                            <div class="text-gray-900 font-medium">{{ username }}</div>
+                            <div class="text-gray-500 text-sm">管理员</div>
+                        </div>
+                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                            <i class="fas fa-cog mr-2"></i>
+                            设置
+                        </a>
+                        <a href="{% url 'sysuser:human' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-50">
+                            <i class="fas fa-user-circle mr-2"></i>
+                            个人中心
+                        </a>
+                        <hr class="my-2 border-gray-100">
+                        <a href="{% url 'sysuser:logout' %}" class="block px-4 py-2 text-red-600 hover:bg-gray-50">
+                            <i class="fas fa-sign-out-alt mr-2"></i>
+                            退出登录
+                        </a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'sysuser:login' %}"
+                       class="flex items-center space-x-2 text-white !rounded-button px-4 py-2 hover:bg-white/10">
+                        <i class="fas fa-user"></i>
+                        <span>{{ username|default:"尚未登录" }}</span>
+                        {#                    <i class="fas fa-chevron-down ml-2 text-sm"></i>#}
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="p-8">
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-6">实时航班概览</h2>
+        <div class="grid grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600">今日航班总数</span>
+                    <i class="fas fa-plane text-primary text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold">{{ today_flights_count }}</div>
+                <div class="text-green-500 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>较昨日 +12.5%</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600">准点率</span>
+                    <i class="fas fa-clock text-primary text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold">{{ on_time_rate }}%</div>
+                <div class="text-green-500 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>较昨日 +1.2%</span>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-gray-600">平均延误时间</span>
+                    <i class="fas fa-hourglass-half text-primary text-xl"></i>
+                </div>
+                <div class="text-3xl font-bold">{{ avg_delay }}分钟</div>
+                <div class="text-red-500 text-sm mt-2">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>较昨日 +5 分钟</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="grid grid-cols-2 gap-8">
+        <div class="chart-container rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">航空公司平均价格</h3>
+            <div id="airlineChart" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="chart-container rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">机票平均价格/出发地</h3>
+            <div id="priceChart" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+    <div class="mt-8 bg-white rounded-lg p-6">
+        <h3 class="text-xl font-bold mb-6">数据分析可视化分析</h3>
+        <p class="text-gray-600 leading-relaxed">
+            根据最新数据显示，各大航空公司的票价趋势呈现稳定下降态势。通过对比分析发现，从不同出发地出发的机票价格差异显著，其中一线城市的机票价格普遍较高。系统将持续监测航班数据变化，为您提供最及时的市场分析。
+        </p>
+    </div>
+</div>
+<footer class="bg-gray-50 px-8 py-12 mt-12">
+    <div class="grid grid-cols-3 gap-8">
+        <div>
+            <h4 class="font-bold mb-4">关于我们</h4>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-600 hover:text-primary">关于我们</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">信息反馈</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">隐私政策</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">免责声明</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-bold mb-4">友情链接</h4>
+            <ul class="space-y-2">
+                <li><a href="#" class="text-gray-600 hover:text-primary">白云机场</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">央视新闻</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">携程旅行</a></li>
+                <li><a href="#" class="text-gray-600 hover:text-primary">去哪儿</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-bold mb-4">联系我们</h4>
+            <p class="text-gray-600">
+                客服电话：400-888-8888<br>
+                工作时间：周一至周日 9:00-21:00<br>
+                邮箱：support@flightdata.com
+            </p>
+        </div>
+    </div>
+</footer>
+</div>
+<script>
+    const airlineChart = echarts.init(document.getElementById('airlineChart'));
+    const priceChart = echarts.init(document.getElementById('priceChart'));
+    // 从后端获取数据
+    fetch('/api/flight-charts/')
+        .then(response => response.json())
+        .then(data => {
+            // 航空公司图表配置
+            const airlineOption = {
+                animation: false,
+                tooltip: { trigger: 'axis' },
+                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    data: data.airline_option.xAxis
+                },
+                yAxis: { type: 'value', name: '价格 (元)' },
+                series: [{
+                    data: data.airline_option.series,
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: { color: '#00A3B5' },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(0, 163, 181, 0.3)' },
+                            { offset: 1, color: 'rgba(0, 163, 181, 0.1)' }
+                        ])
+                    }
+                }]
+            };
+
+            // 城市价格图表配置
+            const priceOption = {
+                animation: false,
+                tooltip: { trigger: 'axis' },
+                grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
+                xAxis: {
+                    type: 'category',
+                    data: data.price_option.xAxis
+                },
+                yAxis: { type: 'value', name: '价格 (元)' },
+                series: [{
+                    data: data.price_option.series,
+                    type: 'line',
+                    smooth: true,
+                    lineStyle: { color: '#4A90E2' },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: 'rgba(74, 144, 226, 0.3)' },
+                            { offset: 1, color: 'rgba(74, 144, 226, 0.1)' }
+                        ])
+                    }
+                }]
+            };
+
+            airlineChart.setOption(airlineOption);
+            priceChart.setOption(priceOption);
+
+            window.addEventListener('resize', function() {
+                airlineChart.resize();
+                priceChart.resize();
+            });
+        });
+</script>
+</body>
+</html>

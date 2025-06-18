@@ -1,0 +1,561 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+.Container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #091731;
+    min-width: 1400px;
+    min-height: 940px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url("./images/bj.png");
+    background-size: cover;
+}
+
+.Container .HeaderTop{
+    width: 100%;
+    height: 7%;
+    background-color: #000827;
+    position: relative;   
+    background-image: url("./images/top.jpg");  
+    background-size: cover;
+}
+
+.Container .HeaderTop .List{
+    width: 20%;
+    height: 100%;
+}
+
+
+.Container .HeaderTop .admin{
+    position: absolute;
+    right: 3%;
+    top: 30%;
+}
+
+.Container .HeaderTop .List ul{
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: #fff;
+}
+
+.Container .HeaderTop .List ul li{
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Container .HeaderTop h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #fff;
+}
+.active{
+    /* 设置盒子内部阴影 */
+    box-shadow: inset -1px 1px 39px #044762;
+}
+
+.Container .DisplayArea {
+    width: 100%;
+    height: 90%;
+    position: relative;
+    box-sizing: border-box;
+}
+
+
+.Container .DisplayArea .Box{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    opacity: 0;
+    transition: opacity .4s linear;
+    min-width: 1400px;
+    min-height: 800px;
+}
+
+.Container .DisplayArea .Box_1 .LScreen_1,
+.Container .DisplayArea .Box_1 .LScreen_2{
+    width: 49.5%;
+    height: 49.5%;
+    float: left;
+    margin-bottom: 10px;
+    justify-content:space-between;
+    align-items: center;
+    box-shadow: inset -1px 1px 39px #044762;
+    box-sizing: border-box;
+    display: flex;
+
+}
+.Container .DisplayArea .Box_1 .LScreen_2{
+    float: right;
+}
+
+.Container .DisplayArea .Box_1 .LScreen_1 .LScreen_1_1,
+.Container .DisplayArea .Box_1 .LScreen_1 .LScreen_1_2,
+.Container .DisplayArea .Box_1 .LScreen_2 .LScreen_2_1,
+.Container .DisplayArea .Box_1 .LScreen_2 .LScreen_2_2{
+    width: 48%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.Container .DisplayArea .Box_1 .LScreen_3{
+    width: 49.5%;
+    height: 49.5%;
+    float: left;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    
+}
+
+.Container .DisplayArea .Box_1 .LScreen_4{
+    width: 49.5%;
+    height: 49.5%;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+
+/* 清除浮动 */
+.Container .DisplayArea .Box_1:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.Container .DisplayArea .Box_1 .LScreen_3 .LScreen_3_1,
+.Container .DisplayArea .Box_1 .LScreen_3 .LScreen_3_2{
+    width: 48%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset -1px 1px 39px #044762;
+    box-sizing: border-box;
+}
+
+.Container .DisplayArea .Box_1 .LScreen_4 .LScreen_4_1,
+.Container .DisplayArea .Box_1 .LScreen_4 .LScreen_4_2{
+    width: 48%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset -1px 1px 39px #044762;
+    box-sizing: border-box;
+}
+
+
+
+.Container .DisplayArea .Box_2 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 800px;
+    color: #fff;
+    min-width: 1400px;
+}
+
+
+.Container .DisplayArea .Box_2  h4{
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_2  .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container .DisplayArea .Box_2 .Top{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/top.png");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_2 .Main{
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+.Container .DisplayArea .Box_2  h3{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_2 .Main .Content{
+    width: 30%;
+    height: 48%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    float: left;
+}
+
+.Container .DisplayArea .Box_2 .Main .Main_Two,
+.Container .DisplayArea .Box_2 .Main .Main_four{
+    margin-left: 35%;
+}
+
+.Container .DisplayArea .Box_2 .Main .Main_main{
+    width: 30%;
+    height: 100%;
+    box-shadow: -2px 4px 10px 0px #fff;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-55%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.Container .DisplayArea .Box_2 .Main .Content .Data{
+    width: 100%;
+    height: 90%;
+    box-shadow: -2px 4px 10px 0px #fff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+
+.Container .DisplayArea .Box_3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 800px;
+    background-size: cover;
+    color: antiquewhite;
+    min-width: 1400px;
+
+} 
+
+.Container .DisplayArea .Box_3 h4{
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_3 .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container .DisplayArea .Box_3 .Top{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/top.png");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_3 .Main{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+.Container .DisplayArea .Box_3 h3{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_3 .Main .Content{
+    width: 48%;
+    height: 48%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("./images/边框.jpg");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_3 .Main .Content .Data{
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+.Container .DisplayArea .Box_4{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    min-height: 800px;
+    background-size: cover;
+    color: #fff;
+    min-width: 1400px;
+    min-height: 800px;
+
+}
+
+
+.Container .DisplayArea .Box_4 h4{
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_4 .main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Container .DisplayArea .Box_4 .Top{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/top.png");
+    background-size: cover;
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_4 .Main{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding-top: 10px;
+}
+
+.Container .DisplayArea .Box_4 h3{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content{
+    width: 48%;
+    height: 48%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url("./images/边框.jpg");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Main_One {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Data{
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Main_One .datashow{
+    width: 30%;
+    height: 10%;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Main_One .ShowData div{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding-top: 20px;
+    background-image: url("./images/边框.jpg");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Main_One .ShowData div .content{
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_4 .Main .Content .Main_One .ShowData{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+   justify-content:space-around;
+}
+
+
+
+.Container .DisplayArea .Box_5{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-size: cover;
+    color: antiquewhite;
+
+
+}
+
+.Container .DisplayArea .Box_5 h4{
+    text-align: center;
+    left: 10px;
+}
+
+/*.Container .DisplayArea .Box_5 .main{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+.Container .DisplayArea .Box_5 .Top{
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/top.png");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_5 .Main{
+    width: 100%;
+    height: 90%;
+    /* background-color: blueviolet; */
+    display: flex;
+    justify-content: space-around;
+    box-sizing: border-box;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_left,
+.Container .DisplayArea .Box_5 .Main .Main_right{
+    flex: 1;
+    height: 100%;
+    /* background-color: antiquewhite; */
+    margin-right: 1%;
+}
+
+
+.Container .DisplayArea .Box_5 .Main .Main_left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} 
+
+.Container .DisplayArea .Box_5 .Main .Main_left h1{
+    margin-bottom: 10px;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_top,
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_main,
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_bottom{
+    width: 60%;
+    height: 30%;
+    /* background-color: aquamarine; */
+    margin-bottom: 1%;
+    box-shadow: 0px 1px 7px 0px #fff;
+    background-image: url("./images/边框.png");
+    background-size: cover;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_top .main,
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_main .main,
+.Container .DisplayArea .Box_5 .Main .Main_left .Main_left_bottom
+.main{
+    width: 100%;
+    height: 90%;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_right h1{
+    text-align: center;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_top{
+    width: 100%;
+    height: 10%;
+    /* background-color: brown; */
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_main{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    /* background-color: aquamarine; */
+}
+
+
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_main .Main_right_main_left,
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_main .Main_right_main_right{
+    width: 80%;
+    padding-top: 10px;
+    margin-right: 1%;
+    height: 90%;
+    /* background-color:yellow; */
+    box-shadow: 0px 1px 7px 0px #fff;
+}
+
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_main .Main_right_main_left .main,
+.Container .DisplayArea .Box_5 .Main .Main_right .Main_right_main .Main_right_main_right .main{
+    width: 100%;
+    height: 90%;
+    /* background-color: black; */
+}

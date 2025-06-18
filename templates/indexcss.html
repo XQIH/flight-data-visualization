@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/hotel.css' %}">
+    <script src="{% static 'bi_bi2/js/jquery.js' %}"></script>
+    <script src="{% static 'bi_bi2/js/echarts.js' %}"></script>
+    <script src="{% static 'bi_bi2/js/china.js' %}"></script>
+    <!-- 词云 -->
+    <script src="{% static 'bi_bi2/js/eacharts.wordCloud.min.js' %}"></script>
+    <title>{% block title %}主页{% endblock title %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 10px;
+            {#background-color: #339967;#}
+            background-image: url('../static/images/backgroud.jpg');
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @media (max-width: 1024px) {
+            html {
+                font-size: 5px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            html {
+                font-size: 1px;
+            }
+        }
+
+        .App-container {
+            width: 100%;
+        }
+
+        .App-container .Home-container {
+            @import "//at.alicdn.com/t/c/font_4434643_suviorucrar.css";
+            width: 100%;
+            border-radius: 1.5rem;
+        }
+
+        .App-container .Home-container .footer-container {
+            box-sizing: border-box;
+            padding: 2rem;
+            width: 85%;
+            height: 30.9rem;
+            background-color: #fff;
+            margin: 2rem auto;
+            display: flex;
+            border-radius: 1.5rem;
+        }
+
+        .App-container .Home-container .footer-container .left {
+            flex: 2;
+            background-color: #fff;
+        }
+
+        .App-container .Home-container .footer-container .left h2 {
+            color: #202B88;
+            font-size: 1.89rem;
+            margin-bottom: 1rem;
+        }
+
+        .App-container .Home-container .footer-container .left p {
+            color: #707278;
+            font-size: 1.4rem;
+        }
+
+        .App-container .Home-container .footer-container .left .content {
+            margin-top: 2rem;
+            height: 6rem;
+        }
+
+        .App-container .Home-container .footer-container .left .content p {
+            margin-top: 1rem;
+            display: flex;
+        }
+
+        .App-container .Home-container .footer-container .left .content p a {
+            font-size: 1.4rem;
+            margin-right: 2rem;
+        }
+
+        .App-container .Home-container .footer-container .right {
+            flex: 1;
+        }
+
+        .App-container .Home-container .footer-container .right p {
+            margin-top: 2rem;
+        }
+
+        .App-container .Home-container .footer-container .right p a {
+            font-size: 1.4rem;
+            position: relative;
+        }
+
+        .App-container .Home-container .footer-container .right p a:hover:after {
+            width: 100%;
+            right: 0rem;
+        }
+
+        .App-container .Home-container .footer-container .right p a:hover {
+            color: #426ce5;
+        }
+
+        .App-container .Home-container .footer-container .right a:after {
+            width: 0;
+            content: "";
+            border-top: 0.3rem solid #426ce5;
+            top: 2.6rem;
+            right: -5rem;
+            display: block;
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        .App-container .Home-container .internation-container {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .App-container .Home-container .internation-container .framework-container {
+            width: 100%;
+            padding-left: 1rem;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            background-color: #fff;
+            box-shadow: 1px 0 10px rgba(21, 30, 28, 0.08);
+            padding: 2.5rem 2rem;
+            box-sizing: border-box;
+            border-radius: 1.5rem;
+        }
+
+        .App-container .Home-container .internation-container .framework-container h2 {
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 1.5rem;
+            color: #228052;
+        }
+
+        .App-container .Home-container .internation-container .framework-container h2 span {
+            font-size: 1.96rem;
+        }
+
+        .App-container .Home-container .internation-container .content {
+            height: 50rem;
+        }
+
+        .App-container .Home-container .internation-container p {
+            padding: 1.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .App-container .Home-container .Domestic-container {
+            width: 85%;
+            margin: 0 auto;
+        }
+
+        .App-container .Home-container .Domestic-container .framework-container {
+            width: 100%;
+            padding-left: 1rem;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            background-color: #fff;
+            box-shadow: 1px 0 10px rgba(21, 30, 28, 0.08);
+            padding: 2.5rem 2rem;
+            box-sizing: border-box;
+            border-radius: 1.5rem;
+        }
+
+        .App-container .Home-container .Domestic-container .framework-container h2 {
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 1.5rem;
+            color: #228052;
+        }
+
+        .App-container .Home-container .Domestic-container .framework-container h2 span {
+            font-size: 1.96rem;
+        }
+
+        .App-container .Home-container .Domestic-container .content {
+            height: 50rem;
+        }
+
+        .App-container .Home-container .Domestic-container p {
+            padding: 1.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .App-container .Home-container .Home-container {
+            width: 85%;
+            box-sizing: border-box;
+            background-color: #fff;
+            box-shadow: 1px 0 10px rgba(21, 30, 28, 0.08);
+            margin: 0 auto;
+        }
+
+        .App-container .Home-container .Home-container .HomeList {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .App-container .Home-container .Home-container .HomeList li {
+            width: 28.5rem;
+            height: 19.5rem;
+            box-sizing: border-box;
+            border: 1px solid #e6e6e6;
+            margin-right: 1rem;
+            margin-left: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            padding: 15px 15px 20px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .Home-container .HomeList li .query {
+            display: flex;
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+            width: 10rem;
+            height: 3rem;
+            color: #2a2c2c;
+            box-shadow: 1px 0 10px rgba(5, 100, 65, 0.2);
+            border-radius: 1.5rem;
+            margin-left: 1rem;
+            line-height: 3rem;
+            margin: 1.5rem auto 0;
+        }
+
+        .Home-container .HomeList li .query span {
+            font-size: 1.4rem;
+        }
+
+        /*.App-container .Home-container .Home-container .HomeList li .query {*/
+        /*    width: 10rem;*/
+        /*    height: 3rem;*/
+        /*    color: #2a2c2c;*/
+        /*    box-shadow: 1px 0 10px rgba(5, 100, 65, 0.2);*/
+        /*    border-radius: 1.5rem;*/
+        /*    margin-left: 1rem;*/
+        /*    line-height: 3rem;*/
+        /*    margin: 1.5rem auto 0;*/
+        /*    display: flex;*/
+        /*    justify-content: space-between;*/
+        /*}*/
+
+        /*.App-container .Home-container .Home-container .HomeList li .query span {*/
+        /*    font-size: 1.4rem;*/
+        /*}*/
+
+        .App-container .Home-container .Home-container .HomeList li .query i {
+            width: 2.6rem;
+            height: 2.6rem;
+            color: #339967;
+            font-size: 3rem;
+            margin-right: 1rem;
+        }
+
+        .App-container .Home-container .Home-container .HomeList li i {
+            font-size: 6rem;
+        }
+
+        .App-container .Home-container .Home-container .HomeList li h2 {
+            margin-top: 1rem;
+        }
+
+        .App-container .Home-container .Home-container .HomeList li p {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+        }
+
+        .App-container .Home-container .Home-container .HomeList li:hover {
+            transform: translateY(-2rem);
+            box-shadow: 0 5px 10px #e5e5e5;
+        }
+
+        .App-container .Home-container .Border-container {
+            right: 12.5rem;
+            bottom: 15rem;
+            position: fixed;
+            width: 4rem;
+            height: 8rem;
+            z-index: 100;
+        }
+
+        .App-container .Home-container .Border-container .opinion:hover img {
+            display: none;
+        }
+
+        .App-container .Home-container .Border-container .opinion:hover span {
+            display: block;
+        }
+
+        .App-container .Home-container .Border-container .opinion span {
+            display: none;
+        }
+
+        .App-container .Home-container .Border-container a {
+            width: 4rem;
+            height: 4rem;
+            background-color: #fff;
+            border: 1px solid rgba(150, 150, 150, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-size: 1.5rem;
+        }
+
+        .App-container .Home-container .Border-container a img {
+            width: 2.8rem;
+        }
+
+        .App-container .Home-container .NavIndex-container {
+            width: 100%;
+            height: 6rem;
+            font-size: 1.4rem;
+            position: sticky;
+            z-index: 100;
+            top: 0;
+            background-color: #01a8c5;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav {
+            width: 80%;
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavLeft {
+            width: 11rem;
+            height: 100%;
+            font-size: 2.1rem;
+            line-height: 6rem;
+            color: #ffff;
+            display: flex;
+            cursor: pointer;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavLeft a {
+            width: 3rem;
+            height: 5.5rem;
+            line-height: 6rem;
+            padding-top: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter {
+            flex: auto;
+            height: 100%;
+            position: relative;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .search {
+            position: absolute;
+            width: 27rem;
+            height: 4.8rem;
+            left: 95.7rem;
+            top: 11.9rem;
+            transform: translate(-40rem, -11.4rem);
+            display: none;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .search .Input {
+            width: 100%;
+            height: 100%;
+            border-radius: 2.4rem;
+            color: #fff;
+            padding-left: 2rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            appearance: none;
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .search .btn {
+            width: 8rem;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: -2rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 3rem;
+            background-color: #228052;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .NavList {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            line-height: 6rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .NavList li {
+            margin-right: 1.5rem;
+            font-size: 1.4rem;
+            color: #ffff;
+            position: relative;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .NavList li:hover:after {
+            width: 100%;
+            right: 0rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavCenter .NavList li:after {
+            width: 0;
+            content: "";
+            border-top: 0.3rem solid #fff;
+            top: 5.6rem;
+            right: -5rem;
+            display: block;
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight {
+            width: 10rem;
+            height: 100%;
+            line-height: 6rem;
+            cursor: pointer;
+            color: #fff;
+            display: flex;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .tool {
+            position: relative;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .tool:hover .RightList {
+            display: block;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight a {
+            width: 3rem;
+            height: 3rem;
+            padding-top: 0.5rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight a img {
+            width: 2.2rem;
+            margin-left: 0.5rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .RightList {
+            position: absolute;
+            top: 5rem;
+            background-color: #01a8c5;
+            color: #fff;
+            display: none;
+            overflow: hidden;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .RightList li {
+            width: 7rem;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .RightList li:hover:after {
+            width: 100%;
+            right: 0rem;
+        }
+
+        .App-container .Home-container .NavIndex-container .mainNav .NavRight .RightList li:after {
+            width: 0;
+            content: "";
+            border-top: 0.3rem solid #fff;
+            right: -5rem;
+            display: block;
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        .App-container .Home-container .footer {
+            margin: 1rem auto;
+            width: 85%;
+            display: flex;
+            font-size: 1.4rem;
+            color: #fff;
+            justify-content: space-around;
+        }
+
+        .App-container .Home-container .footer a {
+            font-size: 1.4rem;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .App-container .Home-container .footer a:hover:after {
+            width: 100%;
+            right: 0rem;
+        }
+
+        .App-container .Home-container .footer a:after {
+            width: 0;
+            content: "";
+            border-top: 0.3rem solid #fff;
+            top: 2.6rem;
+            right: -5rem;
+            display: block;
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        .App-container .Home-container .CenterMain {
+            width: 80%;
+            height: 31.3rem;
+            margin: 0 auto;
+            {#background-color: #339967;#}
+            position: relative;
+        }
+
+        .App-container .Home-container .CenterMain .SearCh-container {
+            position: absolute;
+            width: 75rem;
+            height: 4.8rem;
+            left: 50%;
+            top: 50%;
+            transform: translate(-40rem, -11.4rem);
+        }
+
+        .App-container .Home-container .CenterMain .SearCh-container .Input {
+            width: 100%;
+            height: 100%;
+            border-radius: 2.4rem;
+            color: #fff;
+            padding-left: 2rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            appearance: none;
+            border: none;
+            outline: none;
+            font-size: 1.6rem;
+        }
+
+        .App-container .Home-container .CenterMain .SearCh-container .btn {
+            width: 8rem;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: -2rem;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 3rem;
+            background-color: #228052;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .App-container .Home-container .CenterMain .hotSearCh {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-38rem, -5.4rem);
+            font-size: 1.4rem;
+            color: #fff;
+            display: flex;
+        }
+
+        .App-container .Home-container .CenterMain .hotSearCh a {
+            position: relative;
+            display: block;
+            margin-left: 0.6rem;
+            margin-right: 0.6rem;
+        }
+
+        .App-container .Home-container .CenterMain .hotSearCh a:hover {
+            color: #fced05;
+        }
+
+        .App-container .Home-container .CenterMain .hotSearCh a:hover:after {
+            width: 100%;
+            right: 0rem;
+        }
+
+        .App-container .Home-container .CenterMain .hotSearCh a:after {
+            width: 0;
+            content: "";
+            border-top: 0.3rem solid #fced05;
+            top: 2.6rem;
+            right: -5rem;
+            display: block;
+            position: absolute;
+            transition: all 0.4s ease;
+        }
+
+        .App-container .Home-container .CenterMain .position {
+            width: 100%;
+            height: 15rem;
+            background-color: #fff;
+            box-shadow: 1px 0 10px rgba(21, 30, 28, 0.08);
+            position: relative;
+            top: 50%;
+            box-sizing: border-box;
+            border-radius: 1.5rem;
+            padding: 2.5rem 2rem;
+        }
+    </style>
+
+</head>
+<body>
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>

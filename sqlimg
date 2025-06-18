@@ -1,0 +1,3 @@
+from eralchemy import render_er
+# 从SQLAlchemy模型生成ER图
+render_er('path_to_sqlalchemy_model', 'er_diagram.png')

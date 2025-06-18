@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>航班信息数据分析与可视化系统</title>
+    <!-- 引入外部CSS文件 -->
+{#    <link rel="stylesheet" href="{% static 'css/hotel.css' %}">#}
+        <style>
+        /* 基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .filter-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 输入框样式 */
+        input[type="text"] {
+            width: 200px;
+            margin-right: 10px;
+            padding: 8px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+        }
+
+        /* 按钮样式 */
+        button[type="submit"],
+        .home-btn {
+            width: 100px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover,
+        .home-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* 数据表格样式 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+        }
+
+        /* 表头样式 */
+        .data-table th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* 分页器样式 */
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .pagination a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 页面标题 -->
+<h1 class="header">航班信息数据分析与可视化系统</h1>
+
+
+
+<!-- 数据表格 -->
+<h3><a href="{% url 'sysuser:index' %}" style="text-decoration: none; color: #007bff; display: inline-block; padding: 10px 20px; border: 1px solid #007bff; border-radius: 20px;">首页</a></h3>
+
+
+
+<!-- 分页器 -->
+<div class="pagination" style="width: 300px; margin: 0 auto;">
+    {{ table|safe }}
+</div>
+
+</body>
+</html>

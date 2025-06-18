@@ -1,0 +1,30 @@
+<!-- 数据大屏 -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'bi_bi2/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'bi_bi2/css/bi2.css' %}">
+    <script src="{% static 'bi_bi2/js/jquery.js' %}"></script>
+    <script src="{% static 'bi_bi2/js/echarts.js' %}"></script>
+    <script src="{% static 'bi_bi2/js/china.js' %}"></script>
+    <!-- 词云 -->
+    <script src="{% static 'bi_bi2/js/eacharts.wordCloud.min.js' %}"></script>
+    
+</head>
+<body>
+    <div id="container">
+        <div id="time_show"></div>
+        <h1 class="header_show">数据可视化大屏</h1>
+        <div id="demo1" class="box_show"></div>
+        <div id="demo2" class="box_show"></div>
+        <div id="demo3" class="box_show"></div>
+        <div id="demo4" class="box_show"></div>
+        <div id="demo5" class="box_show"></div>
+    </div>
+    <script src="{% static 'bi_bi2/js/bi.js' %}"></script>
+</body>
+</html>

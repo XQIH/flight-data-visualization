@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="{% static 'css/login_register.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <script src="{% static 'official/jQuery.js' %}"></script>
+    <script src="{% static 'official/sweetaler2@11.js' %}"></script>
+    <script src="{% static 'js/login.js' %}"></script>
+    <script src="{% static 'js/register.js' %}"></script>
+    <script>
+            let ROOTPATH = "{% url 'sysuser:index' %}"
+    </script>
+</head>
+<body>
+<section
+        style="background-repeat: no-repeat;background-size: cover; background-image: url({% static 'images/backgroud.jpg' %}"
+        )>
+
+    <!-- 登录 -->
+
+    <div class="container">
+        <div class="user singinBx">
+            <div class="imgBx"><img src="{% static 'images/1.jpg' %}" alt=""></div>
+            <div class="formBx">
+                <form action="">
+                    <h2>登录</h2>
+                    <input type="text" name="" placeholder="用户名" id="L-user">
+                    <input type="password" name="" placeholder="密码" id="L_pwd">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <input type="button" id="L_login" value="登录" onclick=jump1()>
+                    <p class="signup">没有账号？<a href="#" onclick="topggleForm();">注册</a></p>
+                </form>
+            </div>
+        </div>
+
+        <!-- 注册 -->
+
+        <div class="user singupBx">
+            <div class="formBx">
+                <form action="">
+                    <h2>注册</h2>
+                    <input type="text" name="" placeholder="用户名" id="R_user">
+                    <input type="email" name="" placeholder="邮箱地址" id="R_email">
+                    <input type="password" name="" placeholder="密码" id="R_pwd">
+                    <input type="password" name="" placeholder="再次输入密码" id="R_repwd" onblur="checkpassword()">
+                    <span id="tishi"></span></input>
+                    {#                        <input type="submit" name="" value="注册">#}
+                    <input type="button" id="R_registerbtn" value="注册" onclick=jump4()>
+                    <p class="signup">已有账号？<a href="#" onclick="topggleForm();">登录</a></p>
+                </form>
+            </div>
+            <div class="imgBx"><img src="{% static 'images/2.jpg' %}" alt=""></div>
+        </div>
+
+    </div>
+</section>
+<script type="text/javascript">
+    function topggleForm() {
+        var container = document.querySelector('.container');
+        container.classList.toggle('active');
+    }
+</script>
+</body>
+</html>

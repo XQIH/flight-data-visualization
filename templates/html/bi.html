@@ -1,0 +1,29 @@
+{% extends 'bicss.html' %}
+{% load static %}
+{% block content %}
+    <script src="{% static 'js/bi.js' %}"></script>
+{#    <script src="{% static 'bi_bi2/js/bi.js' %}"></script>#}
+    <div class="main">
+        <div class="head">
+            <div class="left"></div>
+            <div class="cent">
+                <span class="title">航班信息数据分析与可视化系统</span>
+            </div>
+            <div class="right"></div>
+            <div class="moment">
+                <span class="hour"></span>
+                <span class="day"></span>
+                <span class="week"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div id="showOne">{{ bar_html1 | safe }}</div>
+            <div id="showTow">{{ word_html2 | safe }}</div>
+            <div id="showThree">{{ pie_html3 | safe }}</div>
+            <div id="showFour">{{ line_html4 | safe }}</div>
+            <div id="showFive">{{ line_html5 | safe }}</div>
+            <div id="showSix">{{ pie_html6 | safe }}</div>
+        </div>
+    </div>
+
+{% endblock content %}

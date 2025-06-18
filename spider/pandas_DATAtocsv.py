@@ -1,0 +1,25 @@
+#从数据库读取数据到csv
+
+import pandas as pd
+from sqlalchemy import create_engine
+import pymysql
+from 航班信息数据分析与可视化系统.settings import  DATABASE_NAME, DATABASE_USER, DATABASE_PSW, DATABASE_PORT, \
+    DATABASE_HOST
+
+db_host = DATABASE_HOST
+db_username = DATABASE_USER
+db_password = DATABASE_PSW
+db_port = DATABASE_PORT
+db_name = DATABASE_NAME
+
+conn = pymysql.connect(host=db_host, user=db_username, password= db_password, db=db_name, port=db_port)
+
+
+engine = create_engine(f'mysql+pymysql://{db_username}:{db_password}@{db_host}:{db_port}/{db_name}')
+
+# 从数据库读取数据到 DataFrame
+read_data = pd.read_sql('table', con=engine)
+
+# 保存pandas的数据到csv
+read_data.to_csv('table.csv')
+
